@@ -40,9 +40,9 @@ app.patch('/courses/:name', (req, res) => {
 });
 app.delete('/courses/:name', (req, res) => {
   const {name} = req.params;
-  const courseIndex = courses.findIndex(curso => curso.name.toLowerCase() === name);
-  const removedCourse = courses.find(curso => curso.name.toLowerCase() === name);
-  const updatedCourses = courses.splice(courseIndex, 1);
+  const courseIndex = courses.findIndex(course => course.name.toLowerCase() === name);
+  const removedCourse = courses.find(course => course.name.toLowerCase() === name);
+  courses.splice(courseIndex, 1);
 
   return res.status(200).json({newData: courses, dataRemoved:removedCourse });
 });
