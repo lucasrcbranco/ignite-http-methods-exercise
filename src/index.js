@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-let cursos = [
+let courses = [
   {
     name:"NodeJS",
     duration:"25h"
@@ -17,34 +17,34 @@ let cursos = [
   }
 ];
 app.get('/courses', (req, res) => {
-  return res.status(200).json(cursos);
+  return res.status(200).json(courses);
 });
 app.post('/courses', (req, res) => {
   const {name, duration} = req.body;
-  cursos.push({name, duration});
-  return res.status(201).json(cursos);
+  courses.push({name, duration});
+  return res.status(201).json(courses);
 });
 app.put('/courses/:name', (req, res) => {
   const {name} = req.params;
   const {newName} = req.body;
-  const curso = cursos.find(curso => curso.name.toLowerCase() === name);
-  curso.name = newName;
-  return res.status(201).json(curso);
+  const course = courses.find(course => course.name.toLowerCase() === name);
+  course.name = newName;
+  return res.status(201).json(course);
 });
 app.patch('/courses/:name', (req, res) => {
   const {name} = req.params;
   const {newName} = req.body;
-  const curso = cursos.find(curso => curso.name.toLowerCase() === name);
-  curso.name = newName;
-  return res.status(201).json(curso);
+  const course = courses.find(course => course.name.toLowerCase() === name);
+  course.name = newName;
+  return res.status(201).json(course);
 });
 app.delete('/courses/:name', (req, res) => {
   const {name} = req.params;
-  const cursoIndex = cursos.findIndex(curso => curso.name.toLowerCase() === name);
-  const cursoRemovido = cursos.find(curso => curso.name.toLowerCase() === name);
-  const cursosAtualizados = cursos.splice(cursoIndex, 1);
+  const courseIndex = courses.findIndex(curso => curso.name.toLowerCase() === name);
+  const removedCourse = courses.find(curso => curso.name.toLowerCase() === name);
+  const updatedCourses = courses.splice(courseIndex, 1);
 
-  return res.status(200).json({newData: cursosAtualizados, dataRemoved:cursoRemovido });
+  return res.status(200).json({newData: courses, dataRemoved:removedCourse });
 });
 
 app.listen(3333, () => {
